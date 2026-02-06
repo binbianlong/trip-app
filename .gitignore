@@ -4,3 +4,8 @@ node_modules
 dist
 .expo
 .DS_Store
+
+# Supabase
+.temp/
+.branches/
+

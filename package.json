@@ -3,7 +3,23 @@
   "private": true,
   "packageManager": "pnpm@9.12.0",
   "scripts": {
-    "lint": "echo \"(later)\"",
-    "typecheck": "echo \"(later)\""
+    "lint": "biome check .",
+    "lint:fix": "biome check --write .",
+    "format": "biome format --write .",
+    "typecheck": "echo \"(later)\"",
+    "supabase:start": "supabase start",
+    "supabase:stop": "supabase stop",
+    "supabase:status": "supabase status",
+    "supabase:studio": "supabase studio",
+    "dev:mobile": "pnpm --filter mobile start",
+    "dev:api": "supabase functions serve api",
+    "deploy:api": "supabase functions deploy api",
+    "db:push": "supabase db push",
+    "db:reset": "supabase db reset",
+    "migration:new": "supabase migration new"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "2.3.14",
+    "supabase": "^2.75.5"
   }
 }
