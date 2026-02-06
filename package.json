@@ -16,10 +16,18 @@
     "deploy:api": "supabase functions deploy api",
     "db:push": "supabase db push",
     "db:reset": "supabase db reset",
-    "migration:new": "supabase migration new"
+    "migration:new": "supabase migration new",
+    "prepare": "husky"
   },
   "devDependencies": {
     "@biomejs/biome": "2.3.14",
+    "husky": "^9.1.7",
+    "lint-staged": "^16.2.7",
     "supabase": "^2.75.5"
+  },
+  "lint-staged": {
+    "*.{ts,tsx,js,jsx,json}": [
+      "biome check --write --no-errors-on-unmatched"
+    ]
   }
 }
