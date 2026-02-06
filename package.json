@@ -6,7 +6,7 @@
     "lint": "biome check .",
     "lint:fix": "biome check --write .",
     "format": "biome format --write .",
-    "typecheck": "echo \"(later)\"",
+    "typecheck": "pnpm -r --filter \"./apps/**\" --filter \"./packages/**\" exec tsc --noEmit && deno check --config=supabase/functions/api/deno.json supabase/functions/api/*.ts",
     "supabase:start": "supabase start",
     "supabase:stop": "supabase stop",
     "supabase:status": "supabase status",
@@ -23,7 +23,8 @@
     "@biomejs/biome": "2.3.14",
     "husky": "^9.1.7",
     "lint-staged": "^16.2.7",
-    "supabase": "^2.75.5"
+    "supabase": "^2.75.5",
+    "typescript": "~5.9.2"
   },
   "lint-staged": {
     "*.{ts,tsx,js,jsx,json}": [

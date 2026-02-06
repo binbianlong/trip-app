@@ -20,6 +20,9 @@ importers:
       supabase:
         specifier: ^2.75.5
         version: 2.75.5
+      typescript:
+        specifier: ~5.9.2
+        version: 5.9.3
 
   apps/mobile:
     dependencies:
@@ -114,9 +117,6 @@ importers:
       '@types/react':
         specifier: ~19.1.0
         version: 19.1.17
-      typescript:
-        specifier: ~5.9.2
-        version: 5.9.3
 
   packages/shared: {}
 
