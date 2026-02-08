@@ -1,10 +1,10 @@
-import type { CreateTripInput, Trip, UpdateTripInput } from "@trip-app/shared";
 import { supabase } from "./supabase";
 
 /**
- * API client for communicating with Supabase Edge Functions
+ * API client for communicating with Supabase Edge Functions or Local API
  */
 
+const API_BASE_URL = process.env.EXPO_PUBLIC_LOCAL_API_URL;
 const FUNCTIONS_URL = `${process.env.EXPO_PUBLIC_SUPABASE_URL}/functions/v1`;
 
 interface FunctionCallOptions {
@@ -13,7 +13,7 @@ interface FunctionCallOptions {
 }
 
 /**
- * Call a Supabase Edge Function
+ * Call a Supabase Edge Function or Local API
  */
 async function callFunction<T>(
   functionName: string,
@@ -33,7 +33,8 @@ async function callFunction<T>(
     headers.Authorization = `Bearer ${token}`;
   }
 
-  const url = `${FUNCTIONS_URL}/${functionName}${path}`;
+  // ローカルAPIの場合は functionName を含めない
+  const url = API_BASE_URL ? `${API_BASE_URL}${path}` : `${FUNCTIONS_URL}/${functionName}${path}`;
 
   const response = await fetch(url, {
     method,
@@ -52,58 +53,10 @@ async function callFunction<T>(
 }
 
 /**
- * Trip API endpoints
+ * Welcome API
  */
-export const tripApi = {
-  /**
-   * Get all trips
-   */
-  async getTrips(): Promise<{ trips: Trip[] }> {
-    return callFunction("api", "/api/trips");
-  },
-
-  /**
-   * Get a single trip by ID
-   */
-  async getTrip(id: string): Promise<{ trip: Trip }> {
-    return callFunction("api", `/api/trips/${id}`);
-  },
-
-  /**
-   * Create a new trip
-   */
-  async createTrip(input: CreateTripInput): Promise<{ success: boolean; trip: Trip }> {
-    return callFunction("api", "/api/trips", {
-      method: "POST",
-      body: input,
-    });
-  },
-
-  /**
-   * Update a trip
-   */
-  async updateTrip(id: string, input: UpdateTripInput): Promise<{ success: boolean; trip: Trip }> {
-    return callFunction("api", `/api/trips/${id}`, {
-      method: "PUT",
-      body: input,
-    });
-  },
-
-  /**
-   * Delete a trip
-   */
-  async deleteTrip(id: string): Promise<{ success: boolean }> {
-    return callFunction("api", `/api/trips/${id}`, {
-      method: "DELETE",
-    });
-  },
-};
-
-/**
- * Health check
- */
-export const healthApi = {
-  async check(): Promise<{ status: string; timestamp: string }> {
-    return callFunction("api", "/health");
+export const welcomeApi = {
+  async getWelcome(): Promise<{ title: string; message: string; description: string }> {
+    return callFunction("api", "/welcome");
   },
 };

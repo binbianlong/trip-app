@@ -1,0 +1,18 @@
+# すべてのテキストファイルを LF に統一
+* text=auto eol=lf
+
+# Windows 固有のファイルは CRLF
+*.bat text eol=crlf
+*.cmd text eol=crlf
+
+# バイナリファイル
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.ico binary
+*.mov binary
+*.mp4 binary
+*.mp3 binary
+*.zip binary
+*.gz binary
