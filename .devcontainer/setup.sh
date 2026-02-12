@@ -32,6 +32,9 @@ echo ""
 echo "5) Check installed versions"
 deno --version
 echo ""
+node --version
+pnpm --version
+echo ""
 which supabase && supabase --version || echo "Supabase CLI: manual installation needed"
 echo ""
 psql --version
